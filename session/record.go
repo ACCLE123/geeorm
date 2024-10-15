@@ -36,11 +36,11 @@ func (s *Session) Find(values interface{}) error {
 
 	for rows.Next() {
 		dest := reflect.New(destType).Elem()
-		var values []interface{}
+		var fileds []interface{}
 		for _, name := range table.FieldNames {
-			values = append(values, dest.FieldByName(name).Addr().Interface())
+			fileds = append(fileds, dest.FieldByName(name).Addr().Interface())
 		}
-		if err := rows.Scan(values...); err != nil {
+		if err := rows.Scan(fileds...); err != nil {
 			return err
 		}
 		destSlice.Set(reflect.Append(destSlice, dest))
