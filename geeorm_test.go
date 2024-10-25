@@ -40,7 +40,7 @@ func transactionRollback(t *testing.T) {
 
 	_, err := engine.Transaction(func(s *session.Session) (result interface{}, err error) {
 		_ = s.Model(&User{}).CreateTable()
-		_, err = s.Insert(&User{"Tom", 18})
+		s.Insert(&User{"Tom", 18})
 		return nil, errors.New("Error")
 	})
 
